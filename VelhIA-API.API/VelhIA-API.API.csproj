@@ -25,8 +25,8 @@
   <ItemGroup>
     <ProjectReference Include="..\VelhIA-API.Application\VelhIA-API.Application.csproj" />
     <ProjectReference Include="..\VelhIA-API.Data\VelhIA-API.Data.csproj" />
+    <ProjectReference Include="..\VelhIA-API.Domain\VelhIA-API.Domain.csproj" />
     <ProjectReference Include="..\VelhIA-API.IoC\VelhIA-API.IoC.csproj" />
-    <ProjectReference Include="..\VelhIA.Domain\VelhIA.Domain.csproj" />
   </ItemGroup>
 
 </Project>

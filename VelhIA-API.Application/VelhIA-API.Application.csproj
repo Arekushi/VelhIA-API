@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VelhIA.Domain\VelhIA.Domain.csproj" />
+    <ProjectReference Include="..\VelhIA-API.Domain\VelhIA-API.Domain.csproj" />
   </ItemGroup>
 
 </Project>
