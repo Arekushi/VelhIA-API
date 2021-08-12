@@ -46,7 +46,7 @@ namespace VelhIA_API.API
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "VelhaIA_API.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "VelhIA API", Version = "v1" });
             });
         }
 
@@ -57,7 +57,7 @@ namespace VelhIA_API.API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "VelhaIA_API.API v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "VelhIA API v1"));
             }
 
             app.UseHttpsRedirection();
