@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>VelhIA_API.Repositories</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VelhIA-API.Application\VelhIA-API.Application.csproj" />
+    <ProjectReference Include="..\VelhIA-API.Data\VelhIA-API.Data.csproj" />
+    <ProjectReference Include="..\VelhIA.Domain\VelhIA.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

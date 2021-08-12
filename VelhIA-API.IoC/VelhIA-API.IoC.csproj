@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>VelhIA_API.IoC</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VelhIA-API.Application\VelhIA-API.Application.csproj" />
+    <ProjectReference Include="..\VelhIA-API.Repositories\VelhIA-API.Repositories.csproj" />
+    <ProjectReference Include="..\VelhIA-API.Services\VelhIA-API.Services.csproj" />
+    <ProjectReference Include="..\VelhIA.Domain\VelhIA.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
