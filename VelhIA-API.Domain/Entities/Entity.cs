@@ -1,9 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VelhIA_API.Domain.Entities
 {
     public abstract class Entity
     {
+        [Key]
+        [Column("Id", TypeName = "VARCHAR(255)")]
         public Guid Id { get; set; }
 
         public DateTime CreatedOn { get; set; }

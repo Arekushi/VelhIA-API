@@ -7,47 +7,57 @@ namespace VelhIA_API.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterDatabase()
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateTable(
                 name: "Board",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdatedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Enabled = table.Column<bool>(type: "INTEGER", nullable: false)
+                    Id = table.Column<string>(type: "VARCHAR(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Enabled = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Board", x => x.Id);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Player",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
-                    Type = table.Column<int>(type: "INTEGER", nullable: false),
-                    Piece = table.Column<int>(type: "INTEGER", nullable: false),
-                    StartPlaying = table.Column<bool>(type: "INTEGER", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdatedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Enabled = table.Column<bool>(type: "INTEGER", nullable: false)
+                    Id = table.Column<string>(type: "VARCHAR(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Name = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    Piece = table.Column<int>(type: "int", nullable: false),
+                    StartPlaying = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Enabled = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Player", x => x.Id);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Line",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    BoardId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdatedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Enabled = table.Column<bool>(type: "INTEGER", nullable: false)
+                    Id = table.Column<string>(type: "VARCHAR(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    BoardId = table.Column<string>(type: "VARCHAR(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Enabled = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,17 +68,20 @@ namespace VelhIA_API.Data.Migrations
                         principalTable: "Board",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Match",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    BoardId = table.Column<Guid>(type: "TEXT", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdatedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Enabled = table.Column<bool>(type: "INTEGER", nullable: false)
+                    Id = table.Column<string>(type: "VARCHAR(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    BoardId = table.Column<string>(type: "VARCHAR(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Enabled = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -79,18 +92,21 @@ namespace VelhIA_API.Data.Migrations
                         principalTable: "Board",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Column",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Value = table.Column<int>(type: "INTEGER", nullable: true),
-                    LineId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdatedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Enabled = table.Column<bool>(type: "INTEGER", nullable: false)
+                    Id = table.Column<string>(type: "VARCHAR(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Value = table.Column<int>(type: "int", nullable: true),
+                    LineId = table.Column<string>(type: "VARCHAR(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Enabled = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -101,17 +117,20 @@ namespace VelhIA_API.Data.Migrations
                         principalTable: "Line",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "MatchPlayer",
                 columns: table => new
                 {
-                    PlayerId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    MatchId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdatedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Enabled = table.Column<bool>(type: "INTEGER", nullable: false)
+                    PlayerId = table.Column<string>(type: "VARCHAR(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    MatchId = table.Column<string>(type: "VARCHAR(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Enabled = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -128,18 +147,22 @@ namespace VelhIA_API.Data.Migrations
                         principalTable: "Player",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "PlayerMove",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    PlayerId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    ColumnId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdatedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Enabled = table.Column<bool>(type: "INTEGER", nullable: false)
+                    Id = table.Column<string>(type: "VARCHAR(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    PlayerId = table.Column<string>(type: "VARCHAR(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ColumnId = table.Column<string>(type: "VARCHAR(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Enabled = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -156,7 +179,8 @@ namespace VelhIA_API.Data.Migrations
                         principalTable: "Player",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Column_LineId",

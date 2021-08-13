@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using VelhIA_API.IoC.DI;
 using VelhIA_API.Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace VelhIA_API.API
 {
@@ -37,8 +37,17 @@ namespace VelhIA_API.API
 
             services.AddDbContext<AppDbContext>(o =>
             {
-                o.UseSqlite(Configuration.GetConnectionString("default"));
+                string connection = Configuration.GetConnectionString("mySQL2");
+                // o.UseSqlite(Configuration.GetConnectionString("default"));
+                o.UseMySql(connection, ServerVersion.AutoDetect(connection));
             });
+
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
 
             services.ConfigureBusinessServices(Configuration);
             services.ConfigureMappings();
@@ -60,7 +69,9 @@ namespace VelhIA_API.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "VelhIA API v1"));
             }
 
-            app.UseHttpsRedirection();
+            app.UseCors("MyPolicy");
+
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
 

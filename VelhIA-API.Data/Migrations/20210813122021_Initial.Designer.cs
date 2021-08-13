@@ -9,29 +9,31 @@ using VelhIA_API.Data.Context;
 namespace VelhIA_API.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210812164639_Initial")]
+    [Migration("20210813122021_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.9");
 
             modelBuilder.Entity("VelhIA_API.Domain.Entities.Board", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("VARCHAR(255)")
+                        .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime>("UpdatedOn")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -40,24 +42,26 @@ namespace VelhIA_API.Data.Migrations
 
             modelBuilder.Entity("VelhIA_API.Domain.Entities.Column", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("VARCHAR(255)")
+                        .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<Guid>("LineId")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("LineId")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<DateTime>("UpdatedOn")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int?>("Value")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -68,21 +72,23 @@ namespace VelhIA_API.Data.Migrations
 
             modelBuilder.Entity("VelhIA_API.Domain.Entities.Line", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("VARCHAR(255)")
+                        .HasColumnName("Id");
 
-                    b.Property<Guid>("BoardId")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("BoardId")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime>("UpdatedOn")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -93,21 +99,22 @@ namespace VelhIA_API.Data.Migrations
 
             modelBuilder.Entity("VelhIA_API.Domain.Entities.Match", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("VARCHAR(255)")
+                        .HasColumnName("Id");
 
-                    b.Property<Guid?>("BoardId")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("BoardId")
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime>("UpdatedOn")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -118,20 +125,20 @@ namespace VelhIA_API.Data.Migrations
 
             modelBuilder.Entity("VelhIA_API.Domain.Entities.MatchPlayer", b =>
                 {
-                    b.Property<Guid>("MatchId")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("MatchId")
+                        .HasColumnType("VARCHAR(255)");
 
-                    b.Property<Guid>("PlayerId")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("PlayerId")
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime>("UpdatedOn")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("MatchId", "PlayerId");
 
@@ -142,30 +149,31 @@ namespace VelhIA_API.Data.Migrations
 
             modelBuilder.Entity("VelhIA_API.Domain.Entities.Player", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("VARCHAR(255)")
+                        .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.Property<int>("Piece")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<bool>("StartPlaying")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<int>("Type")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedOn")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -174,24 +182,27 @@ namespace VelhIA_API.Data.Migrations
 
             modelBuilder.Entity("VelhIA_API.Domain.Entities.PlayerMove", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("VARCHAR(255)")
+                        .HasColumnName("Id");
 
-                    b.Property<Guid>("ColumnId")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("ColumnId")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<Guid>("PlayerId")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("PlayerId")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<DateTime>("UpdatedOn")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
