@@ -1,17 +1,13 @@
 ﻿using System.Net;
+using VelhIA_API.Domain.Responses.Endpoints;
 
 namespace VelhIA_API.Domain.Responses.Exceptions
 {
-    public class ExceptionResponse<T>
+    public class ExceptionResponse<T> : Endpoints.DefaultResponse<T> 
+        where T : class
     {
-        public HttpStatusCode Code { get; set; }
+        public ExceptionResponse() { }
 
         public string ExceptionName { get; set; }
-
-        public bool Success { get; set; }
-
-        public string Message { get; set; }
-
-        public T Object { get; set; }
     }
 }

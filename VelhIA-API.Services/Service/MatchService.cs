@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System;
 using System.Threading.Tasks;
 using VelhIA_API.Application.Repositories;
 using VelhIA_API.Application.Services;
@@ -7,6 +8,7 @@ using VelhIA_API.Domain.Requests;
 using VelhIA_API.Domain.Requests.Endpoints;
 using VelhIA_API.Domain.Responses;
 using VelhIA_API.Domain.Responses.Endpoints;
+using VelhIA_API.Middlewares.Exceptions;
 
 namespace VelhIA_API.Services.Service
 {
@@ -27,9 +29,27 @@ namespace VelhIA_API.Services.Service
         public async Task<MatchResponse> CreateMatch(MatchRequest request)
         {
             Match match = RequestToEntity(request);
-            match.Board = ticTacToeService.CreateBoard();
 
-            return EntityToResponse(await repository.Create(match));
+            if (match.Players.Count == 2)
+            {
+                try
+                {
+                    match.Board = ticTacToeService.CreateBoard();
+                    match = await repository.Create(match);
+
+                    MatchResponse response = EntityToResponse(match);
+
+                    return response;
+                }
+                catch (Exception)
+                {
+                    throw new DataInsertException("Match");
+                }
+            }
+
+            throw new IncorrectNumberPlayersException(
+                ConvertCollection<MatchPlayer, MatchPlayerResponse>(match.Players)
+            );
         }
 
         public async Task<DoMoveResponse> DoMove(DoMoveRequest request)

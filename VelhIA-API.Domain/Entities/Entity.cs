@@ -7,8 +7,9 @@ namespace VelhIA_API.Domain.Entities
     public abstract class Entity
     {
         [Key]
+        [Required]
         [Column("Id", TypeName = "VARCHAR(255)")]
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
