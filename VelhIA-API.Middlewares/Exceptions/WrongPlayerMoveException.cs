@@ -14,6 +14,7 @@ namespace VelhIA_API.Middlewares.Exceptions
                 Success = false,
                 Code = Code,
                 Object = player,
+                ExceptionName = nameof(WrongPlayerMoveException),
                 Message = $"Não é a vez do jogador {player.Name} jogar, espere sua vez, seu ladrãozinho >:("
             };
         }

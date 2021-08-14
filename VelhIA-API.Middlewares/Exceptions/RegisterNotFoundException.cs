@@ -13,6 +13,7 @@ namespace VelhIA_API.Middlewares.Exceptions
             {
                 Success = false,
                 Code = Code,
+                ExceptionName = nameof(RegisterNotFoundException),
                 Message = $"O registro com ID: {id} não existe!"
             };
         }

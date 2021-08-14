@@ -14,6 +14,7 @@ namespace VelhIA_API.Middlewares.Exceptions
                 Success = false,
                 Code = Code,
                 Object = column,
+                ExceptionName = nameof(InvalidColumnValueException),
                 Message = "O valor da coluna deve ser 'X' ou 'O'",
             };
         }

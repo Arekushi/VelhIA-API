@@ -14,6 +14,7 @@ namespace VelhIA_API.Middlewares.Exceptions
                 Success = false,
                 Code = Code,
                 Object = column,
+                ExceptionName = nameof(ColumnFilledException),
                 Message = $"A coluna já está preenchida, não há jogadas possíveis"
             };
         }

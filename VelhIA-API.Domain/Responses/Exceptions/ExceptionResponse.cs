@@ -1,11 +1,12 @@
-﻿using Newtonsoft.Json;
-using System.Net;
+﻿using System.Net;
 
 namespace VelhIA_API.Domain.Responses.Exceptions
 {
     public class ExceptionResponse<T>
     {
         public HttpStatusCode Code { get; set; }
+
+        public string ExceptionName { get; set; }
 
         public bool Success { get; set; }
 

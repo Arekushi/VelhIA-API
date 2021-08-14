@@ -67,6 +67,7 @@ namespace VelhIA_API.Middlewares.Middlewares
                         Code = code,
                         Success = false,
                         Object = e,
+                        ExceptionName = e.GetType().Name,
                         Message = e.Message
                     }
                 };
