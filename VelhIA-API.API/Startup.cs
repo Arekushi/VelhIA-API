@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 using VelhIA_API.IoC.DI;
 using VelhIA_API.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using VelhIA_API.Middlewares.Middlewares;
+using Newtonsoft.Json.Serialization;
 
 namespace VelhIA_API.API
 {
@@ -31,13 +33,15 @@ namespace VelhIA_API.API
             .SetCompatibilityVersion(CompatibilityVersion.Latest)
             .AddNewtonsoftJson(o =>
             {
+                o.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                o.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                 o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                o.UseCamelCasing(true);
+                JsonConvert.DefaultSettings = () => o.SerializerSettings;
             });
 
             services.AddDbContext<AppDbContext>(o =>
             {
-                string connection = Configuration.GetConnectionString("mySQL2");
+                string connection = Configuration.GetConnectionString("mySQL");
                 // o.UseSqlite(Configuration.GetConnectionString("default"));
                 o.UseMySql(connection, ServerVersion.AutoDetect(connection));
             });
@@ -70,6 +74,7 @@ namespace VelhIA_API.API
             }
 
             app.UseCors("MyPolicy");
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             // app.UseHttpsRedirection();
 

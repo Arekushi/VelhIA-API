@@ -1,4 +1,5 @@
-﻿using VelhIA_API.Domain.Entities;
+﻿using System.Threading.Tasks;
+using VelhIA_API.Domain.Entities;
 using VelhIA_API.Domain.Requests;
 using VelhIA_API.Domain.Responses;
 

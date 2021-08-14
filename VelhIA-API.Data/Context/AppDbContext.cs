@@ -49,6 +49,16 @@ namespace VelhIA_API.Data.Context
                 .HasForeignKey(mp => mp.PlayerId);
 
             #endregion
+
+            #region Board - Match
+
+            builder.Entity<Match>()
+                .HasOne(m => m.Board)
+                .WithOne(b => b.Match)
+                .HasForeignKey<Board>(b => b.MatchId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            #endregion
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

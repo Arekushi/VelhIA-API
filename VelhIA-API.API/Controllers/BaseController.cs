@@ -45,10 +45,10 @@ namespace VelhIA_API.API.Controllers
             return Ok(response);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutById([FromBody] R request, Guid id)
+        [HttpPut]
+        public async Task<IActionResult> Put(R request)
         {
-            var response = await service.EditById(request, id);
+            var response = await service.Edit(request);
             return Ok(response);
         }
     }

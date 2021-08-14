@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VelhIA-API.Application\VelhIA-API.Application.csproj" />
+    <ProjectReference Include="..\VelhIA-API.Middlewares\VelhIA-API.Middlewares.csproj" />
   </ItemGroup>
 
 </Project>

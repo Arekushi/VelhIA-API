@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace VelhIA_API.Domain.Requests
 {
@@ -10,5 +11,9 @@ namespace VelhIA_API.Domain.Requests
         }
 
         public ICollection<LineRequest> Lines { get; set; }
+
+        public MatchRequest Match { get; set; }
+
+        public Guid? MatchId { get; set; }
     }
 }

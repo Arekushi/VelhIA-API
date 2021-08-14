@@ -15,5 +15,18 @@ namespace VelhIA_API.Services.Service
             IMapper mapper) : base(repository, mapper)
         {
         }
+
+        //public async Task<PlayerMoveResponse> DoMove(ColumnRequest columnRequest, Player player)
+        //{
+        //    var response = await columnService.Edit(columnRequest);
+
+        //    PlayerMove playerMove = new PlayerMove()
+        //    {
+        //        Column = Convert<ColumnResponse, Column>(response),
+        //        Player = player
+        //    };
+
+        //    return EntityToResponse(await repository.Create(playerMove));
+        //}
     }
 }

@@ -11,7 +11,9 @@ namespace VelhIA_API.Domain.Requests
         }
 
         public Guid BoardId { get; set; }
+
         public BoardRequest Board { get; set; }
+
         public ICollection<ColumnRequest> Columns { get; set; }
     }
 }

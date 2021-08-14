@@ -17,6 +17,6 @@ namespace VelhIA_API.Application.Services
 
         Task<P> GetById(Guid id);
 
-        Task<P> EditById(R request, Guid id);
+        Task<P> Edit(R request);
     }
 }

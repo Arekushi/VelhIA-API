@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using VelhIA_API.Domain.Enums;
 
 namespace VelhIA_API.Domain.Entities
 {
@@ -12,9 +13,9 @@ namespace VelhIA_API.Domain.Entities
             Players = new List<MatchPlayer>();
         }
 
-        public ICollection<MatchPlayer> Players { get; set; }
+        public MatchType Type { get; set; }
 
-        public Guid? BoardId { get; set; }
+        public ICollection<MatchPlayer> Players { get; set; }
 
         public Board Board { get; set; }
     }

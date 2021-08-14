@@ -11,18 +11,19 @@ namespace VelhIA_API.Data.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Board",
+                name: "Match",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "VARCHAR(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Type = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     UpdatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Enabled = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Board", x => x.Id);
+                    table.PrimaryKey("PK_Match", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -35,7 +36,9 @@ namespace VelhIA_API.Data.Migrations
                     Name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Type = table.Column<int>(type: "int", nullable: false),
-                    Piece = table.Column<int>(type: "int", nullable: false),
+                    AlgoritmType = table.Column<int>(type: "int", nullable: true),
+                    Piece = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     StartPlaying = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     UpdatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
@@ -48,12 +51,12 @@ namespace VelhIA_API.Data.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Line",
+                name: "Board",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "VARCHAR(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    BoardId = table.Column<string>(type: "VARCHAR(255)", nullable: false)
+                    MatchId = table.Column<string>(type: "VARCHAR(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     UpdatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
@@ -61,60 +64,11 @@ namespace VelhIA_API.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Line", x => x.Id);
+                    table.PrimaryKey("PK_Board", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Line_Board_BoardId",
-                        column: x => x.BoardId,
-                        principalTable: "Board",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Match",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "VARCHAR(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    BoardId = table.Column<string>(type: "VARCHAR(255)", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Enabled = table.Column<bool>(type: "tinyint(1)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Match", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Match_Board_BoardId",
-                        column: x => x.BoardId,
-                        principalTable: "Board",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Column",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "VARCHAR(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Value = table.Column<int>(type: "int", nullable: true),
-                    LineId = table.Column<string>(type: "VARCHAR(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Enabled = table.Column<bool>(type: "tinyint(1)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Column", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Column_Line_LineId",
-                        column: x => x.LineId,
-                        principalTable: "Line",
+                        name: "FK_Board_Match_MatchId",
+                        column: x => x.MatchId,
+                        principalTable: "Match",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -145,6 +99,58 @@ namespace VelhIA_API.Data.Migrations
                         name: "FK_MatchPlayer_Player_PlayerId",
                         column: x => x.PlayerId,
                         principalTable: "Player",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Line",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "VARCHAR(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    BoardId = table.Column<string>(type: "VARCHAR(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Enabled = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Line", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Line_Board_BoardId",
+                        column: x => x.BoardId,
+                        principalTable: "Board",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Column",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "VARCHAR(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Value = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    I = table.Column<int>(type: "int", nullable: false),
+                    J = table.Column<int>(type: "int", nullable: false),
+                    LineId = table.Column<string>(type: "VARCHAR(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Enabled = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Column", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Column_Line_LineId",
+                        column: x => x.LineId,
+                        principalTable: "Line",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -183,6 +189,12 @@ namespace VelhIA_API.Data.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Board_MatchId",
+                table: "Board",
+                column: "MatchId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Column_LineId",
                 table: "Column",
                 column: "LineId");
@@ -190,11 +202,6 @@ namespace VelhIA_API.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Line_BoardId",
                 table: "Line",
-                column: "BoardId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Match_BoardId",
-                table: "Match",
                 column: "BoardId");
 
             migrationBuilder.CreateIndex(
@@ -222,9 +229,6 @@ namespace VelhIA_API.Data.Migrations
                 name: "PlayerMove");
 
             migrationBuilder.DropTable(
-                name: "Match");
-
-            migrationBuilder.DropTable(
                 name: "Column");
 
             migrationBuilder.DropTable(
@@ -235,6 +239,9 @@ namespace VelhIA_API.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Board");
+
+            migrationBuilder.DropTable(
+                name: "Match");
         }
     }
 }

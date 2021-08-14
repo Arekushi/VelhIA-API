@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using VelhIA_API.Domain.Enums;
 
 namespace VelhIA_API.Domain.Responses
@@ -14,10 +15,13 @@ namespace VelhIA_API.Domain.Responses
 
         public PlayerType Type { get; set; }
 
-        public Piece? Piece { get; set; }
+        public AlgoritmType? AlgoritmType { get; set; }
+
+        public string Piece { get; set; }
 
         public bool StartPlaying { get; set; }
 
+        [JsonIgnore]
         public ICollection<MatchPlayerResponse> Matches { get; set; }
     }
 }

@@ -24,17 +24,10 @@ namespace VelhIA_API.Repositories.Repository
 
         public virtual async Task<E> Create(E entity)
         {
-            try
-            {
-                var data = await dbSet.AddAsync(entity);
-                await SaveChanges();
+            var data = await dbSet.AddAsync(entity);
+            await SaveChanges();
 
-                return data.Entity;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return data.Entity;
         }
 
         public virtual async Task<bool> DeleteById(Guid id)
@@ -42,42 +35,24 @@ namespace VelhIA_API.Repositories.Repository
             E entity = await dbSet
                 .FirstOrDefaultAsync(e => e.Id == id);
 
-            try
-            {
-                dbSet.Remove(entity);
-                await SaveChanges();
+            dbSet.Remove(entity);
+            await SaveChanges();
 
-                return true;
-            } catch (Exception)
-            {
-                throw;
-            }
+            return true;
         }
 
         public virtual async Task<E> Edit(E entity)
         {
-            try
-            {
-                var entry = dbSet.Update(entity);
-                await SaveChanges();
+            var entry = dbSet.Update(entity);
+            await SaveChanges();
 
-                return entry.Entity;
-            } catch (Exception)
-            {
-                throw;
-            }
+            return entry.Entity;
         }
 
         public virtual async Task<E> GetById(Guid id)
         {
-            E entity = await dbSet.FirstOrDefaultAsync(e => e.Id == id);
-
-            if (entity is null)
-            {
-                throw new Exception();
-            }
-
-            return entity;
+            return await dbSet
+                .FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public virtual async Task<int> SaveChanges()

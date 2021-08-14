@@ -24,4 +24,8 @@
     <ProjectReference Include="..\VelhIA-API.Domain\VelhIA-API.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

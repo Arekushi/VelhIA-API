@@ -9,7 +9,7 @@ using VelhIA_API.Data.Context;
 namespace VelhIA_API.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210813122021_Initial")]
+    [Migration("20210814084648_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,10 +32,16 @@ namespace VelhIA_API.Data.Migrations
                     b.Property<bool>("Enabled")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<string>("MatchId")
+                        .HasColumnType("VARCHAR(255)");
+
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MatchId")
+                        .IsUnique();
 
                     b.ToTable("Board");
                 });
@@ -53,6 +59,12 @@ namespace VelhIA_API.Data.Migrations
                     b.Property<bool>("Enabled")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<int>("I")
+                        .HasColumnType("int");
+
+                    b.Property<int>("J")
+                        .HasColumnType("int");
+
                     b.Property<string>("LineId")
                         .IsRequired()
                         .HasColumnType("VARCHAR(255)");
@@ -60,8 +72,8 @@ namespace VelhIA_API.Data.Migrations
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("Value")
-                        .HasColumnType("int");
+                    b.Property<string>("Value")
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -104,21 +116,19 @@ namespace VelhIA_API.Data.Migrations
                         .HasColumnType("VARCHAR(255)")
                         .HasColumnName("Id");
 
-                    b.Property<string>("BoardId")
-                        .HasColumnType("VARCHAR(255)");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime(6)");
 
                     b.Property<bool>("Enabled")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BoardId");
 
                     b.ToTable("Match");
                 });
@@ -154,6 +164,9 @@ namespace VelhIA_API.Data.Migrations
                         .HasColumnType("VARCHAR(255)")
                         .HasColumnName("Id");
 
+                    b.Property<int?>("AlgoritmType")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime(6)");
 
@@ -163,8 +176,8 @@ namespace VelhIA_API.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("Piece")
-                        .HasColumnType("int");
+                    b.Property<string>("Piece")
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("StartPlaying")
                         .HasColumnType("tinyint(1)");
@@ -213,6 +226,16 @@ namespace VelhIA_API.Data.Migrations
                     b.ToTable("PlayerMove");
                 });
 
+            modelBuilder.Entity("VelhIA_API.Domain.Entities.Board", b =>
+                {
+                    b.HasOne("VelhIA_API.Domain.Entities.Match", "Match")
+                        .WithOne("Board")
+                        .HasForeignKey("VelhIA_API.Domain.Entities.Board", "MatchId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Match");
+                });
+
             modelBuilder.Entity("VelhIA_API.Domain.Entities.Column", b =>
                 {
                     b.HasOne("VelhIA_API.Domain.Entities.Line", "Line")
@@ -231,15 +254,6 @@ namespace VelhIA_API.Data.Migrations
                         .HasForeignKey("BoardId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Board");
-                });
-
-            modelBuilder.Entity("VelhIA_API.Domain.Entities.Match", b =>
-                {
-                    b.HasOne("VelhIA_API.Domain.Entities.Board", "Board")
-                        .WithMany()
-                        .HasForeignKey("BoardId");
 
                     b.Navigation("Board");
                 });
@@ -294,6 +308,8 @@ namespace VelhIA_API.Data.Migrations
 
             modelBuilder.Entity("VelhIA_API.Domain.Entities.Match", b =>
                 {
+                    b.Navigation("Board");
+
                     b.Navigation("Players");
                 });
 

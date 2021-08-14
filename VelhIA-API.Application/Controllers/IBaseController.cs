@@ -16,6 +16,6 @@ namespace VelhIA_API.Application.Controllers
 
         Task<IActionResult> DeleteById(Guid id);
 
-        Task<IActionResult> PutById(R request, Guid id);
+        Task<IActionResult> Put(R request);
     }
 }

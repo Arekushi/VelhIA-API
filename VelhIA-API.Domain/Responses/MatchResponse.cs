@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using VelhIA_API.Domain.Enums;
 
 namespace VelhIA_API.Domain.Responses
 {
@@ -10,9 +10,9 @@ namespace VelhIA_API.Domain.Responses
             Players = new List<MatchPlayerResponse>();
         }
 
-        public ICollection<MatchPlayerResponse> Players { get; set; }
+        public MatchType Type { get; set; }
 
-        public Guid? BoardId { get; set; }
+        public ICollection<MatchPlayerResponse> Players { get; set; }
 
         public BoardResponse Board { get; set; }
     }

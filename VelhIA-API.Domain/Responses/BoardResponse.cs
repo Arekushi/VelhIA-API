@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace VelhIA_API.Domain.Responses
 {
@@ -10,5 +12,11 @@ namespace VelhIA_API.Domain.Responses
         }
 
         public ICollection<LineResponse> Lines { get; set; }
+
+        [JsonIgnore]
+        public MatchResponse Match { get; set; }
+
+        [JsonIgnore]
+        public Guid? MatchId { get; set; }
     }
 }

@@ -16,7 +16,9 @@ namespace VelhIA_API.Domain.Entities
 
         public PlayerType Type { get; set; }
 
-        public Piece Piece { get; set; }
+        public AlgoritmType? AlgoritmType { get; set; }
+
+        public string Piece { get; set; }
 
         public bool StartPlaying { get; set; }
 

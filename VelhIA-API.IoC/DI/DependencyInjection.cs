@@ -32,6 +32,7 @@ namespace VelhIA_API.IoC.DI
                 services.AddTransient<IMatchService, MatchService>();
                 services.AddTransient<IPlayerService, PlayerService>();
                 services.AddTransient<IPlayerMoveService, PlayerMoveService>();
+                services.AddTransient<ITicTacToeService, TicTacToeService>();
             }
         }
 
