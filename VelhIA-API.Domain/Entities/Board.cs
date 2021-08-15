@@ -5,7 +5,7 @@ using VelhIA_API.Domain.Structures;
 
 namespace VelhIA_API.Domain.Entities
 {
-    [Table("Board")]
+    [Table(nameof(Board))]
     public class Board : Entity
     {
         public Board()

@@ -4,7 +4,7 @@ using VelhIA_API.Domain.Structures;
 
 namespace VelhIA_API.Domain.Entities
 {
-    [Table("Column")]
+    [Table(nameof(Column))]
     public class Column : Entity
     {
         public Column()

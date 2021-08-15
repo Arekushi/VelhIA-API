@@ -34,37 +34,23 @@ namespace VelhIA_API.Services.Service
 
         public void MatchValidation(Match match)
         {
-            if (match.HasZeroPlayers())
-            {
-                for (int i = 0; i < 2; i++)
-                {
-                    Player player = new();
-                    player.StartPlaying = System.Convert.ToBoolean(i);
-                    player.ConfigFields();
+            if (match.Players.Count == 0)
+                match.AddTwoPlayers();
 
-                    match.Players.Add(new() { Player = player });
-                }
-            } else
-            {
-                if (!match.HasTwoPlayers())
-                {
-                    throw new IncorrectNumberPlayersException(
-                        ConvertCollection<MatchPlayer, MatchPlayerResponse>(match.Players)
-                    );
-                }
+            else if (match.Players.Count == 1)
+                match.AddIAPlayer();
 
-                if (match.IsValidPlayersStarted())
-                {
-                    throw new InvalidPlayersToStart(
-                        ConvertCollection<MatchPlayer, MatchPlayerResponse>(match.Players)
-                    );
-                }
+            else if (match.Players.Count != 2)
+                throw new IncorrectNumberPlayersException(
+                    ConvertCollection<MatchPlayer, MatchPlayerResponse>(match.Players)
+                );
 
-                foreach (MatchPlayer player in match.Players)
-                {
-                    player.Player.ConfigFields();
-                }
-            }
+            else if (match.IsValidPlayersStarted())
+                throw new InvalidPlayersToStartException(
+                    ConvertCollection<MatchPlayer, MatchPlayerResponse>(match.Players)
+                );
+
+            ConfigPlayers(match);
         }
 
         #endregion
@@ -74,6 +60,14 @@ namespace VelhIA_API.Services.Service
         private bool CheckIsValidMove(Player player, ColumnRequest columnRequest)
         {
             return false;
+        }
+
+        private void ConfigPlayers(Match match)
+        {
+            foreach (MatchPlayer player in match.Players)
+            {
+                player.Player.ConfigFields();
+            }
         }
 
         #endregion

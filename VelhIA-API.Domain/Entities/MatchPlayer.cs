@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VelhIA_API.Domain.Entities
 {
+    [Table("Match_Player")]
     public class MatchPlayer : Entity
     {
         [NotMapped]

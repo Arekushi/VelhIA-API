@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VelhIA_API.Domain.Entities
 {
-    [Table("Line")]
+    [Table(nameof(Line))]
     public class Line : Entity
     {
         public Line()

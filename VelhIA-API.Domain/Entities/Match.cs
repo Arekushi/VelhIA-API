@@ -6,7 +6,7 @@ using VelhIA_API.Domain.Enums;
 
 namespace VelhIA_API.Domain.Entities
 {
-    [Table("Match")]
+    [Table(nameof(Match))]
     public class Match : Entity
     {
         public Match()
@@ -21,9 +21,16 @@ namespace VelhIA_API.Domain.Entities
 
         public Board Board { get; set; }
 
+        public Result Result { get; set; }
+
         public bool HasZeroPlayers()
         {
             return Players.Count == 0;
+        }
+
+        public bool HasOnePlayer()
+        {
+            return Players.Count == 1;
         }
 
         public bool HasTwoPlayers()
@@ -38,6 +45,31 @@ namespace VelhIA_API.Domain.Entities
                 .Count() != 1;
 
             return started;
+        }
+
+        public void AddTwoPlayers()
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                Players.Add(new() {
+                    Player = new()
+                    {
+                        StartPlaying = Convert.ToBoolean(i)
+                    }
+                });
+            }
+        }
+
+        public void AddIAPlayer()
+        {
+            Players.Add(new() {
+                Player = new()
+                {
+                    StartPlaying = !Players.First().Player.StartPlaying,
+                    Type = PlayerType.COMPUTER,
+                    AlgoritmType = AlgoritmType.MINIMAX
+                }
+            });
         }
     }
 }

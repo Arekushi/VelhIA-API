@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VelhIA_API.Domain.Entities
 {
-    [Table("PlayerMove")]
+    [Table("Player_Move")]
     public class PlayerMove : Entity
     {
         public Guid PlayerId { get; set; }

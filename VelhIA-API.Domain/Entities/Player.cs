@@ -48,7 +48,7 @@ namespace VelhIA_API.Domain.Entities
         {
             return Type switch
             {
-                PlayerType.IA => $"IA-{AlgoritmType}",
+                PlayerType.COMPUTER => $"IA-{AlgoritmType}",
                 _ => $"{realNameGenerator.Generate().Split(' ')[0]}#" +
                     $"{random.Next(0, 9999):0000}"
             };
@@ -62,7 +62,7 @@ namespace VelhIA_API.Domain.Entities
 
         private AlgoritmType? SetAlgoritmType()
         {
-            if (Type is PlayerType.IA)
+            if (Type is PlayerType.COMPUTER)
             {
                 return Enums.AlgoritmType.MINIMAX;
             }

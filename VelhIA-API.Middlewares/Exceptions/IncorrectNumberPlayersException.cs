@@ -16,7 +16,7 @@ namespace VelhIA_API.Middlewares.Exceptions
                 Code = Code,
                 ExceptionName = nameof(IncorrectNumberPlayersException),
                 Message = $"Número incorreto de players ({players.Count})! " +
-                          $"É necessário apenas 2 players para criar uma partida válida.",
+                          $"São necessários apenas 2 players para criar uma partida válida.",
                 Data = players
             };
         }

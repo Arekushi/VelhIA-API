@@ -3,6 +3,6 @@
     public enum PlayerType
     {
         HUMAN = 0,
-        IA = 1
+        COMPUTER = 1
     }
 }

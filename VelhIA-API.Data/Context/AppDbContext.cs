@@ -11,6 +11,10 @@ namespace VelhIA_API.Data.Context
     {
         #region Properties
 
+        public DbSet<Victory> Victories { get; set; }
+
+        public DbSet<Result> Results { get; set; }
+
         public DbSet<Board> Boards { get; set; }
 
         public DbSet<Column> Columns { get; set; }
@@ -25,9 +29,7 @@ namespace VelhIA_API.Data.Context
 
         #endregion
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        {
-        }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -56,6 +58,26 @@ namespace VelhIA_API.Data.Context
                 .HasOne(m => m.Board)
                 .WithOne(b => b.Match)
                 .HasForeignKey<Board>(b => b.MatchId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            #endregion
+
+            #region  Result - Match
+
+            builder.Entity<Match>()
+                .HasOne(m => m.Result)
+                .WithOne(r => r.Match)
+                .HasForeignKey<Result>(r => r.MatchId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            #endregion
+
+            #region Victory - Result
+
+            builder.Entity<Result>()
+                .HasOne(m => m.Victory)
+                .WithOne(r => r.Result)
+                .HasForeignKey<Victory>(r => r.ResultId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             #endregion

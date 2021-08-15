@@ -5,17 +5,17 @@ using VelhIA_API.Domain.Responses.Exceptions;
 
 namespace VelhIA_API.Middlewares.Exceptions
 {
-    public class InvalidPlayersToStart : BaseException
+    public class InvalidPlayersToStartException : BaseException
     {
-        public InvalidPlayersToStart(ICollection<MatchPlayerResponse> players)
+        public InvalidPlayersToStartException(ICollection<MatchPlayerResponse> players)
         {
             Code = HttpStatusCode.BadRequest;
             Response = new ExceptionResponse<ICollection<MatchPlayerResponse>>()
             {
                 Success = false,
                 Code = Code,
-                ExceptionName = nameof(InvalidPlayersToStart),
-                Message = $"Valor inválido de jogadores para começar!",
+                ExceptionName = nameof(InvalidPlayersToStartException),
+                Message = $"Valor inválido de jogadores que começam a jogar!",
                 Data = players
             };
         }
