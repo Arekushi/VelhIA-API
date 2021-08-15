@@ -8,8 +8,6 @@ namespace VelhIA_API.Domain.Entities
     {
         public string Type { get; set; }
 
-        public int Value { get; set; }
-
         public Result Result { get; set; }
 
         public Guid ResultId { get; set; }

@@ -4,8 +4,6 @@
     {
         public string Type { get; set; }
 
-        public int Value { get; set; }
-
         public ResultResponse Result { get; set; }
 
         public PlayerResponse Winner { get; set; }

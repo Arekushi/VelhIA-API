@@ -23,7 +23,7 @@ namespace VelhIA_API.Domain.Entities
         [Required]
         public PlayerType Type { get; set; }
 
-        public AlgoritmType? AlgoritmType { get; set; }
+        public AlgorithmType? AlgorithmType { get; set; }
 
         public string Piece { get; set; }
 
@@ -39,7 +39,7 @@ namespace VelhIA_API.Domain.Entities
 
         public override void ConfigFields()
         {
-            AlgoritmType ??= SetAlgoritmType();
+            AlgorithmType ??= SetAlgoritmType();
             Name ??= SetName();
             Piece ??= SetPiece();
         }
@@ -48,7 +48,7 @@ namespace VelhIA_API.Domain.Entities
         {
             return Type switch
             {
-                PlayerType.COMPUTER => $"IA-{AlgoritmType}",
+                PlayerType.COMPUTER => $"IA-{AlgorithmType}",
                 _ => $"{realNameGenerator.Generate().Split(' ')[0]}#" +
                     $"{random.Next(0, 9999):0000}"
             };
@@ -60,11 +60,11 @@ namespace VelhIA_API.Domain.Entities
                 Structures.Piece.CROSS : Structures.Piece.CIRCLE;
         }
 
-        private AlgoritmType? SetAlgoritmType()
+        private AlgorithmType? SetAlgoritmType()
         {
             if (Type is PlayerType.COMPUTER)
             {
-                return Enums.AlgoritmType.MINIMAX;
+                return Enums.AlgorithmType.MINIMAX;
             }
 
             return null;

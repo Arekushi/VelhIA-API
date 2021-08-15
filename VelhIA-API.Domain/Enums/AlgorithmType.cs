@@ -1,6 +1,6 @@
 ﻿namespace VelhIA_API.Domain.Enums
 {
-    public enum AlgoritmType
+    public enum AlgorithmType
     {
         MINIMAX = 0
     }

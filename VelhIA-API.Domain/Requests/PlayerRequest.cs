@@ -8,7 +8,7 @@ namespace VelhIA_API.Domain.Requests
 
         public PlayerType Type { get; set; }
 
-        public AlgoritmType? AlgoritmType { get; set; }
+        public AlgorithmType? AlgorithmType { get; set; }
 
         public bool StartPlaying { get; set; }
     }

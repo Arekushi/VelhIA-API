@@ -67,7 +67,7 @@ namespace VelhIA_API.Domain.Entities
                 {
                     StartPlaying = !Players.First().Player.StartPlaying,
                     Type = PlayerType.COMPUTER,
-                    AlgoritmType = AlgoritmType.MINIMAX
+                    AlgorithmType = AlgorithmType.MINIMAX
                 }
             });
         }

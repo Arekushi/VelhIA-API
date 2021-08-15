@@ -6,8 +6,6 @@ namespace VelhIA_API.Domain.Requests
     {
         public string Type { get; set; }
 
-        public int Value { get; set; }
-
         public ResultRequest Result { get; set; }
 
         public Guid ResultId { get; set; }

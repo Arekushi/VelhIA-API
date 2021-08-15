@@ -15,7 +15,7 @@ namespace VelhIA_API.Domain.Responses
 
         public PlayerType Type { get; set; }
 
-        public AlgoritmType? AlgoritmType { get; set; }
+        public AlgorithmType? AlgorithmType { get; set; }
 
         public string Piece { get; set; }
 
