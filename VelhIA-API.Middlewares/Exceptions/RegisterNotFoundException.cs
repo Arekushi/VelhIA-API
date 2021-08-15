@@ -6,7 +6,7 @@ namespace VelhIA_API.Middlewares.Exceptions
 {
     public class RegisterNotFoundException : BaseException
     {
-        public RegisterNotFoundException(Guid id)
+        public RegisterNotFoundException(string entity, Guid id)
         {
             Code = HttpStatusCode.NotFound;
             Response = new ExceptionResponse<string>()
@@ -14,7 +14,7 @@ namespace VelhIA_API.Middlewares.Exceptions
                 Success = false,
                 Code = Code,
                 ExceptionName = nameof(RegisterNotFoundException),
-                Message = $"O registro com ID: {id} não existe!"
+                Message = $"O registro na entidade ({entity}), de ID ({id}) não existe!"
             };
         }
     }

@@ -8,7 +8,7 @@ namespace VelhIA_API.Application.Services
 {
     public interface ITicTacToeService
     {
-        Board CreateBoard();
+        void MatchValidation(Match match);
 
         Task<DoMoveResponse> DoMove(
             ICollection<Player> players,

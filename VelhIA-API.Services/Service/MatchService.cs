@@ -8,11 +8,11 @@ using VelhIA_API.Domain.Requests;
 using VelhIA_API.Domain.Requests.Endpoints;
 using VelhIA_API.Domain.Responses;
 using VelhIA_API.Domain.Responses.Endpoints;
-using VelhIA_API.Middlewares.Exceptions;
 
 namespace VelhIA_API.Services.Service
 {
-    public class MatchService : BaseService<Match, MatchRequest, MatchResponse>, IMatchService
+    public class MatchService :
+        BaseService<Match, MatchRequest, MatchResponse>, IMatchService
     {
         private readonly ITicTacToeService ticTacToeService;
         private readonly new IMatchRepository repository;
@@ -28,28 +28,18 @@ namespace VelhIA_API.Services.Service
 
         public async Task<MatchResponse> CreateMatch(MatchRequest request)
         {
-            Match match = RequestToEntity(request);
-
-            if (match.Players.Count == 2)
+            try
             {
-                try
-                {
-                    match.Board = ticTacToeService.CreateBoard();
-                    match = await repository.Create(match);
+                Match match = RequestToEntity(request);
+                ticTacToeService.MatchValidation(match);
 
-                    MatchResponse response = EntityToResponse(match);
-
-                    return response;
-                }
-                catch (Exception)
-                {
-                    throw new DataInsertException("Match");
-                }
+                match = await repository.Create(match);
+                return EntityToResponse(match);
             }
-
-            throw new IncorrectNumberPlayersException(
-                ConvertCollection<MatchPlayer, MatchPlayerResponse>(match.Players)
-            );
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<DoMoveResponse> DoMove(DoMoveRequest request)

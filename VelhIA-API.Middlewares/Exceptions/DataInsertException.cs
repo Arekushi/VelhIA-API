@@ -5,7 +5,7 @@ namespace VelhIA_API.Middlewares.Exceptions
 {
     public class DataInsertException : BaseException
     {
-        public DataInsertException(string entity)
+        public DataInsertException(string entity, object e = null)
         {
             Code = HttpStatusCode.BadRequest;
             Response = new ExceptionResponse<object>()
@@ -13,7 +13,8 @@ namespace VelhIA_API.Middlewares.Exceptions
                 Code = Code,
                 Success = false,
                 ExceptionName = nameof(DataInsertException),
-                Message = $"Não foi possível criar uma instância de {entity}"
+                Message = $"Não foi possível criar uma instância de {entity}",
+                Data = e
             };
         }
     }

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using VelhIA_API.Application.Repositories;
 using VelhIA_API.Application.Services;
@@ -11,20 +10,18 @@ using VelhIA_API.Middlewares.Exceptions;
 
 namespace VelhIA_API.Services.Service
 {
-    public class BaseService<E, R, P> : IBaseService<E, R, P>
+    public class BaseService<E, R, P> : Service, IBaseService<E, R, P>
         where E : Entity
         where R : EntityRequest
         where P : EntityResponse
     {
         protected readonly IBaseRepository<E> repository;
-        protected readonly IMapper mapper;
 
         public BaseService(
             IBaseRepository<E> repository,
-            IMapper mapper)
+            IMapper mapper) : base(mapper)
         {
             this.repository = repository;
-            this.mapper = mapper;
         }
 
         #region Implemented Methods
@@ -60,7 +57,7 @@ namespace VelhIA_API.Services.Service
                 return EntityToResponse(entity);
             }
 
-            throw new RegisterNotFoundException(id);
+            throw new RegisterNotFoundException(typeof(E).Name, id);
         }
 
         #endregion
@@ -85,16 +82,6 @@ namespace VelhIA_API.Services.Service
         protected E ResponseToEntity(P response)
         {
             return mapper.Map<E>(response);
-        }
-
-        protected G Convert<F, G>(F from)
-        {
-            return mapper.Map<F, G>(from);
-        }
-
-        protected ICollection<G> ConvertCollection<F, G>(ICollection<F> from)
-        {
-            return mapper.Map<ICollection<F>, ICollection<G>>(from);
         }
 
         #endregion

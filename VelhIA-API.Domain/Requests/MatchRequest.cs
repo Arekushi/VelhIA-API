@@ -14,7 +14,5 @@ namespace VelhIA_API.Domain.Requests
         public MatchType Type { get; set; }
 
         public ICollection<MatchPlayerRequest> Players { get; set; }
-
-        public BoardRequest Board { get; set; }
     }
 }

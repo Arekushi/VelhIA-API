@@ -16,5 +16,7 @@ namespace VelhIA_API.Domain.Entities
         public DateTime UpdatedOn { get; set; }
 
         public bool Enabled { get; set; }
+
+        public virtual void ConfigFields() { }
     }
 }

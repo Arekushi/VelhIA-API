@@ -12,8 +12,7 @@ namespace VelhIA_API.IoC.DI
     {
         public static void ConfigureBusinessServices(
             this IServiceCollection services,
-            IConfiguration configuration
-        )
+            IConfiguration configuration)
         {
             if (services != null)
             {
@@ -23,8 +22,9 @@ namespace VelhIA_API.IoC.DI
                 services.AddTransient<ILineRepository, LineRepository>();
                 services.AddTransient<IMatchRepository, MatchRepository>();
                 services.AddTransient<IPlayerRepository, PlayerRepository>();
-                services.AddTransient<IPlayerMoveRepository, PlayerMoveRepository>(); 
+                services.AddTransient<IPlayerMoveRepository, PlayerMoveRepository>();
 
+                services.AddScoped<IService, Service>();
                 services.AddScoped(typeof(IBaseService<,,>), typeof(BaseService<,,>));
                 services.AddTransient<IBoardService, BoardService>();
                 services.AddTransient<IColumnService, ColumnService>();
