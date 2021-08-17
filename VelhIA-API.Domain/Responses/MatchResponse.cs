@@ -15,5 +15,7 @@ namespace VelhIA_API.Domain.Responses
         public ICollection<MatchPlayerResponse> Players { get; set; }
 
         public BoardResponse Board { get; set; }
+
+        public int Round { get; set; }
     }
 }

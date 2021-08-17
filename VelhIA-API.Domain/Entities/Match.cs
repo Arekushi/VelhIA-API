@@ -13,11 +13,14 @@ namespace VelhIA_API.Domain.Entities
         {
             Players = new List<MatchPlayer>();
             Board = new Board();
+            Round = 0;
         }
 
         public MatchType Type { get; set; }
 
         public ICollection<MatchPlayer> Players { get; set; }
+
+        public int Round { get; set; }
 
         public Board Board { get; set; }
 

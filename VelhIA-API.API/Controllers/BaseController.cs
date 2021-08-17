@@ -11,7 +11,7 @@ namespace VelhIA_API.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BaseController<E, R, P> : ControllerBase, IBaseController<E, R>
+    public abstract class BaseController<E, R, P> : ControllerBase, IBaseController<E, R>
         where E : Entity
         where R : EntityRequest
         where P : EntityResponse
@@ -25,28 +25,28 @@ namespace VelhIA_API.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteById(Guid id)
+        public virtual async Task<IActionResult> DeleteById(Guid id)
         {
             var response = await service.DeleteById(id);
             return Ok(response);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(Guid id)
+        public virtual async Task<IActionResult> GetById(Guid id)
         {
             var response = await service.GetById(id);
             return Ok(response);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(R request)
+        public virtual async Task<IActionResult> Post(R request)
         {
             var response = await service.Create(request);
             return Ok(response);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put(R request)
+        public virtual async Task<IActionResult> Put(R request)
         {
             var response = await service.Edit(request);
             return Ok(response);

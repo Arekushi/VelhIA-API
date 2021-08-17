@@ -13,6 +13,7 @@ namespace VelhIA_API.Domain.Entities
         public Player()
         {
             Matches = new List<MatchPlayer>();
+            Moves = new List<PlayerMove>();
             realNameGenerator = new();
             random = new();
         }
@@ -30,6 +31,8 @@ namespace VelhIA_API.Domain.Entities
         public bool StartPlaying { get; set; }
 
         public ICollection<MatchPlayer> Matches { get; set; }
+
+        public ICollection<PlayerMove> Moves { get; set; }
 
         [NotMapped]
         private readonly RealNameGenerator realNameGenerator;

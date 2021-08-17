@@ -42,11 +42,19 @@ namespace VelhIA_API.Services.Service
             }
         }
 
-        public async Task<DoMoveResponse> DoMove(DoMoveRequest request)
+        public async Task<MakeMoveResponse> MakeMove(MakeMoveRequest request)
         {
-            //Player player = await repository.GetCurrentPlayer(request.MatchId);
-            //return await ticTacToeService.DoMove(null, request.Column);
-            return null;
+            (Player current, Player next) = await repository.GetPlayers(request.MatchId);
+
+            await ticTacToeService.MoveValidation(current, request.PlayerId, request.Column);
+            await ticTacToeService.MakeMove(request.Column.Id.Value, current);
+            await repository.AddRound(request.MatchId);
+
+            return new()
+            {
+                Success = true,
+                NextToPlay = Convert<Player, PlayerResponse>(next)
+            };
         }
     }
 }

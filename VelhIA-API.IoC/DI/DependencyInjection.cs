@@ -23,6 +23,8 @@ namespace VelhIA_API.IoC.DI
                 services.AddTransient<IMatchRepository, MatchRepository>();
                 services.AddTransient<IPlayerRepository, PlayerRepository>();
                 services.AddTransient<IPlayerMoveRepository, PlayerMoveRepository>();
+                services.AddTransient<IResultRepository, ResultRepository>();
+                services.AddTransient<IVictoryRepository, VictoryRepository>();
 
                 services.AddScoped<IService, Service>();
                 services.AddScoped(typeof(IBaseService<,,>), typeof(BaseService<,,>));
@@ -33,6 +35,8 @@ namespace VelhIA_API.IoC.DI
                 services.AddTransient<IPlayerService, PlayerService>();
                 services.AddTransient<IPlayerMoveService, PlayerMoveService>();
                 services.AddTransient<ITicTacToeService, TicTacToeService>();
+                services.AddTransient<IResultService, ResultService>();
+                services.AddTransient<IVictoryService, VictoryService>();
             }
         }
 

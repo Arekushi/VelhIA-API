@@ -3,7 +3,7 @@ using System;
 
 namespace VelhIA_API.Domain.Responses
 {
-    public class ResultResponse
+    public class ResultResponse : EntityResponse
     {
         public PlayerMoveResponse LastMove { get; set; }
 

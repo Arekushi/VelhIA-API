@@ -32,6 +32,12 @@ namespace VelhaIA_API.IoC.AutoMapper
             CreateMap<PlayerMove, PlayerMoveRequest>()
                 .ReverseMap();
 
+            CreateMap<Result, ResultRequest>()
+                .ReverseMap();
+
+            CreateMap<Victory, VictoryRequest>()
+                .ReverseMap();
+
             #endregion
 
             #region Entity - Response
@@ -55,6 +61,12 @@ namespace VelhaIA_API.IoC.AutoMapper
                 .ReverseMap();
 
             CreateMap<PlayerMove, PlayerMoveResponse>()
+                .ReverseMap();
+
+            CreateMap<Result, ResultResponse>()
+                .ReverseMap();
+
+            CreateMap<Victory, VictoryResponse>()
                 .ReverseMap();
 
             #endregion

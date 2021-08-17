@@ -11,6 +11,6 @@ namespace VelhIA_API.Application.Services
     {
         Task<MatchResponse> CreateMatch(MatchRequest request);
 
-        Task<DoMoveResponse> DoMove(DoMoveRequest request);
+        Task<MakeMoveResponse> MakeMove(MakeMoveRequest request);
     }
 }

@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Threading.Tasks;
 using VelhIA_API.Domain.Entities;
 using VelhIA_API.Domain.Requests;
-using VelhIA_API.Domain.Responses.Endpoints;
 
 namespace VelhIA_API.Application.Services
 {
@@ -10,9 +9,8 @@ namespace VelhIA_API.Application.Services
     {
         void MatchValidation(Match match);
 
-        Task<DoMoveResponse> DoMove(
-            ICollection<Player> players,
-            ColumnRequest columnRequest
-        );
+        Task MakeMove(Guid columnId, Player currentPlayer);
+
+        Task MoveValidation(Player currentPlayer, Guid playerRequestId, ColumnRequest columnRequest);
     }
 }

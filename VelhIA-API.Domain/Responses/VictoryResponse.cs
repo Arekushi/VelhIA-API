@@ -1,6 +1,6 @@
 ﻿namespace VelhIA_API.Domain.Responses
 {
-    public class VictoryResponse
+    public class VictoryResponse : EntityResponse
     {
         public string Type { get; set; }
 

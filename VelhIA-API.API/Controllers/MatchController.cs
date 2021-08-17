@@ -28,10 +28,10 @@ namespace VelhIA_API.API.Controllers
             return Ok(response);
         }
 
-        [HttpPost("do-move")]
-        public async Task<IActionResult> DoMove(DoMoveRequest request)
+        [HttpPost("make-move")]
+        public async Task<IActionResult> MakeMove(MakeMoveRequest request)
         {
-            var response = await service.DoMove(request);
+            var response = await service.MakeMove(request);
             return Ok(response);
         }
     }
